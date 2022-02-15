@@ -2,11 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import "semantic-ui-css/semantic.min.css";
 import "react-calendar/dist/Calendar.css";
+import "react-toastify/dist/ReactToastify.min.css";
 import './app/layout/styles.css';
 import App from './app/layout/App';
 import reportWebVitals from './reportWebVitals';
 import { store, StoreContext } from './app/stores/store';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
+import { createBrowserHistory } from "history";
+
+export const history = createBrowserHistory();
 
 ReactDOM.render(
   //<React.StrictMode>
@@ -15,9 +19,12 @@ ReactDOM.render(
 
    
    <StoreContext.Provider value={store}>
-     <BrowserRouter>
+     {/* <BrowserRouter>
       <App />
-     </BrowserRouter>
+     </BrowserRouter> */}
+     <HistoryRouter history={history}>
+      <App />
+     </HistoryRouter>
    </StoreContext.Provider>,
   document.getElementById('root')
 );
